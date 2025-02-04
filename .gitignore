@@ -6,12 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+################################################
+
+trained_potato_leaf_disease_model.keras
+training_hist.json
 
 ################################################
 
-dataset
-
-##################################################
 # Distribution / packaging
 .Python
 build/
