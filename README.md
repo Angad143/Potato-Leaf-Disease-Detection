@@ -14,7 +14,7 @@
 </div> 
 
 -------------
-# Potato Leaf Disease Detection
+# 🥔🌿 Potato Leaf Disease Detection System 🥔🌿
 
 ## 📌 Project Overview
 This project focuses on detecting potato leaf diseases using deep learning techniques. A Convolutional Neural Network (CNN) model is trained on a dataset of potato leaf images to classify leaves as **Healthy**, **Early Blight**, or **Late Blight**. This system aims to help farmers and agricultural experts diagnose diseases early and take preventive measures.
