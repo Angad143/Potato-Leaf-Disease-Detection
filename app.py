@@ -5,24 +5,33 @@ from PIL import Image
 import io
 
 # Define the model predictions functions
-@st.cache_resource
+@st.cache_resource  # Cache the model loading to optimize performance
 def load_model():
+    # Load the pre-trained model from the specified file
     return tf.keras.models.load_model("trained_potato_leaf_disease_model.keras")
 
 def model_prediction(test_image):
     """Function to load the trained model and predict the class of the uploaded image."""
-    model = load_model()
+    model = load_model()  # model load using the cached function
     
-    # Convert the PIL image to a file-like object
+    # Convert the PIL image to a file-like object (BytesIO)
     img_byte_arr = io.BytesIO()
-    test_image.save(img_byte_arr, format='JPEG')
-    img_byte_arr.seek(0)
+    test_image.save(img_byte_arr, format='JPEG')  # Save the image to the file-like object
+    img_byte_arr.seek(0)  # Move the cursor to the beginning of the file-like object
     
+    # Load the image from the file-like object and resize it to the target size (128x128)
     image = tf.keras.preprocessing.image.load_img(img_byte_arr, target_size=(128, 128))
+    
+    # Convert the image to a numpy array
     input_arr = tf.keras.preprocessing.image.img_to_array(image)
-    input_arr = np.array([input_arr])
+    input_arr = np.array([input_arr])  # Convert the array to a batch (batch size = 1)
+    
+    # Predict the class of the image using the loaded model
     predictions = model.predict(input_arr)
+    
+    # Return the index of the class with the highest predicted probability
     return np.argmax(predictions)
+
 
 # Sidebar Navigation
 st.sidebar.title("Home Page...")
